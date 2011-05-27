@@ -2,7 +2,7 @@
 
 /*
 Plugin Name: WP Games Gallery
-Plugin URI: https://github.com/gemserk/wp-games-galery
+Plugin URI: https://github.com/gemserk/wp-games-gallery
 Description: List games in your wordpress site!
 Version: 0.0.2-SNAPSHOT
 Author: Gemserk
