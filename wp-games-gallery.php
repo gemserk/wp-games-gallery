@@ -20,13 +20,14 @@ function create_games_gallery($atts, $content = null) {
 
 	foreach ($postslist as $post) :  setup_postdata($post); 
 
+		$screenshot_size = "256px";
+
 		// avoid current page
 		if ($post->ID == $page_id)  {
 			continue;
 		}
 
 		$post_ancestors = get_ancestors($post->ID, 'page' );
-		$post_link = get_permalink($post->ID);
 
 		// we want only child pages
 		if (!in_array($page_id, $post_ancestors)) {
@@ -37,21 +38,34 @@ function create_games_gallery($atts, $content = null) {
 			continue;
 		}
 
+		$game_title = $post->post_title;
+		$game_link = get_permalink($post->ID);
+
 		$result .= "<li>";
-		$result .= "<a href=\"".$post_link."\">".$post->post_title."</a>";
+		$result .= "<a href=\"".$game_link."\">".$game_title."</a>";
 
 		$post_custom_fields = get_post_custom($post->ID);
-		$post_screenshots = $post_custom_fields['screenshot'];
+		$game_screenshots = $post_custom_fields['screenshot'];
 
-		if ($post_screenshots) {
-			foreach ($post_screenshots as $post_screenshot) :
+		if ($game_screenshots) {
+			foreach ($game_screenshots as $game_screenshot) :
 				$result .= "<p>";
-				$result .= "<a href=\"".$post_link."\">";
-				$result .= "<img width=\"300px\" src=\"".$post_screenshot."\">";
+				$result .= "<a href=\"".$game_link."\">";
+				$result .= "<img width=\"".$screenshot_size."\" src=\"".$game_screenshot."\">";
 				$result .= "</img>";
 				$result .= "</a>";
 				$result .= "</p>";
 			endforeach;
+		}
+
+		// A small description to show in the gallery.
+		$game_descriptions = $post_custom_fields['description'];
+	
+		if ($game_descriptions) {
+			$game_description = $game_descriptions[0];
+			$result .= "<div class=\"description\">";
+			$result .= $game_description;
+			$result .= "</div>";
 		}
 
 		$result .= "</li>";
