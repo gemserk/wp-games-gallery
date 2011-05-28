@@ -16,7 +16,6 @@ function create_games_gallery($atts, $content = null) {
 	$postslist = get_posts( $query_args );
 
 	$result = "";
-	$result .= "<ul>";
 
 	foreach ($postslist as $post) :  setup_postdata($post); 
 
@@ -41,20 +40,23 @@ function create_games_gallery($atts, $content = null) {
 		$game_title = $post->post_title;
 		$game_link = get_permalink($post->ID);
 
-		$result .= "<li>";
+		$result .= "<div class=\"game\">";
+
+		$result .= "<div class=\"title\">";
 		$result .= "<a href=\"".$game_link."\">".$game_title."</a>";
+		$result .= "</div>";
 
 		$post_custom_fields = get_post_custom($post->ID);
 		$game_screenshots = $post_custom_fields['screenshot'];
 
 		if ($game_screenshots) {
 			foreach ($game_screenshots as $game_screenshot) :
-				$result .= "<p>";
+				$result .= "<div class=\"image\">";
 				$result .= "<a href=\"".$game_link."\">";
 				$result .= "<img width=\"".$screenshot_size."\" src=\"".$game_screenshot."\">";
 				$result .= "</img>";
 				$result .= "</a>";
-				$result .= "</p>";
+				$result .= "</div>";
 			endforeach;
 		}
 
@@ -68,11 +70,9 @@ function create_games_gallery($atts, $content = null) {
 			$result .= "</div>";
 		}
 
-		$result .= "</li>";
+		$result .= "</div>";
 
 	endforeach; 	
-
-	$result .= "</ul>";
 
 	return $result;
 }
