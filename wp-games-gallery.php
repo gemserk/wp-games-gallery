@@ -10,13 +10,13 @@ Author URI: http://blog.gemserk.com
 */
 
 function create_games_gallery($atts, $content = null) {
-
 	$page_id = get_the_ID();
 
 	$query_args = array( 'numberposts' => 50, 'post_type' => 'page', 'order'=> 'ASC', 'orderby' => 'title');
 	$postslist = get_posts( $query_args );
 
-	echo "<ul>";
+	$result = "";
+	$result .= "<ul>";
 
 	foreach ($postslist as $post) :  setup_postdata($post); 
 
@@ -37,29 +37,30 @@ function create_games_gallery($atts, $content = null) {
 			continue;
 		}
 
-		echo "<li>";
-
-		?> 
-			<a href="<?php echo $post_link ?>"><?php echo $post->post_title; ?></a>
-		<?php 
+		$result .= "<li>";
+		$result .= "<a href=\"".$post_link."\">".$post->post_title."</a>";
 
 		$post_custom_fields = get_post_custom($post->ID);
 		$post_screenshots = $post_custom_fields['screenshot'];
 
 		if ($post_screenshots) {
 			foreach ($post_screenshots as $post_screenshot) :
-			?>
-				<p><a href="<?php echo $post_link ?>"><img width="300px" src="<?php echo $post_screenshot; ?>"></img></a></p>
-			<?php
+				$result .= "<p>";
+				$result .= "<a href=\"".$post_link."\">";
+				$result .= "<img width=\"300px\" src=\"".$post_screenshot."\">";
+				$result .= "</img>";
+				$result .= "</a>";
+				$result .= "</p>";
 			endforeach;
 		}
 
-		echo "</li>";
-
+		$result .= "</li>";
 
 	endforeach; 	
 
-	echo "</ul>";
+	$result .= "</ul>";
+
+	return $result;
 }
 
 add_shortcode('create_games_gallery', 'create_games_gallery');
