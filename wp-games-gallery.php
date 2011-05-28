@@ -12,6 +12,7 @@ Author URI: http://blog.gemserk.com
 function create_games_gallery($atts, $content = null) {
 	$page_id = get_the_ID();
 
+	// TODO: add plugin invoke parameters for query arguments
 	$query_args = array( 'numberposts' => 50, 'post_type' => 'page', 'order'=> 'ASC', 'orderby' => 'title');
 	$postslist = get_posts( $query_args );
 

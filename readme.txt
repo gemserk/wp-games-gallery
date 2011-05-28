@@ -18,3 +18,4 @@ For example, if you have a page "Games" and two children pages "Game1" and "Game
 Current supported metadata values available to use are:
 
 - screenshot : a list of screenshots urls of your game. 
+- description : an usually small description of your game.
