@@ -20,8 +20,6 @@ function create_games_gallery($atts, $content = null) {
 
 	foreach ($postslist as $post) :  setup_postdata($post); 
 
-		$screenshot_size = "256px";
-
 		// avoid current page
 		if ($post->ID == $page_id)  {
 			continue;
@@ -54,7 +52,7 @@ function create_games_gallery($atts, $content = null) {
 			foreach ($game_screenshots as $game_screenshot) :
 				$result .= "<div class=\"image\">";
 				$result .= "<a href=\"".$game_link."\">";
-				$result .= "<img width=\"".$screenshot_size."\" src=\"".$game_screenshot."\">";
+				$result .= "<img src=\"".$game_screenshot."\">";
 				$result .= "</img>";
 				$result .= "</a>";
 				$result .= "</div>";
