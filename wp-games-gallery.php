@@ -12,8 +12,19 @@ Author URI: http://blog.gemserk.com
 function create_games_gallery($atts, $content = null) {
 	$page_id = get_the_ID();
 
+	// From wordpress documentation: Pages cannot be associated with Categories and cannot be assigned Tags. The organizational structure for Pages comes only from their hierarchical interrelationships, and not from Tags or Categories. 
+
+	// we should use another feature like custom fields to filter the pages we want.
+
 	// this defines the default function parameter values
-	$default_atts = array( 'numberposts' => 30, 'post_type' => 'page', 'order'=> 'ASC', 'orderby' => 'title');
+	$default_atts = array( 
+		'numberposts' => 30, 
+		'post_type' => 'page', 
+		'order'=> 'ASC', 
+		'orderby' => 'title',
+		'meta_key' => null,
+		'meta_value' => null,
+	);
 
 	// this merges the default parameters with the current parameters
 	$query_args = shortcode_atts($default_atts, $atts);
