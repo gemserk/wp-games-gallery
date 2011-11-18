@@ -1,0 +1,3 @@
+* be able use meta_query which is more powerful than only meta_key and meta_value, but is also complex to use
+* configure in some way the css classes to use in the generated content if we want to use different styles for different sections
+* orderby allows order by meta_value too, so we could use some values to order the retured games in the way we want to (note: it orders alphabetically, so if we use numbers it will order 11 before 9).
