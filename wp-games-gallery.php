@@ -20,18 +20,11 @@ function create_games_gallery($atts, $content = null) {
 
 	$query_args['post_parent'] = $page_id;
 
-	// now, this gets all the posts matching the criteria, the thing is, we are filtering when iterating too, so 
-	// we have to see how to use numberposts argumets right in order to show the correct number of results
 	$postslist = get_posts( $query_args );
 
 	$result = "";
 
 	foreach ($postslist as $post) :  setup_postdata($post); 
-
-		// avoid current page
-		if ($post->ID == $page_id)  {
-			continue;
-		}
 
 		$game_title = $post->post_title;
 		$game_link = get_permalink($post->ID);
