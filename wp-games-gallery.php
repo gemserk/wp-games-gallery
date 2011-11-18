@@ -18,6 +18,8 @@ function create_games_gallery($atts, $content = null) {
 	// this merges the default parameters with the current parameters
 	$query_args = shortcode_atts($default_atts, $atts);
 
+	$query_args['post_parent'] = $page_id;
+
 	// now, this gets all the posts matching the criteria, the thing is, we are filtering when iterating too, so 
 	// we have to see how to use numberposts argumets right in order to show the correct number of results
 	$postslist = get_posts( $query_args );
@@ -28,17 +30,6 @@ function create_games_gallery($atts, $content = null) {
 
 		// avoid current page
 		if ($post->ID == $page_id)  {
-			continue;
-		}
-
-		$post_ancestors = get_ancestors($post->ID, 'page' );
-
-		// we want only child pages
-		if (!in_array($page_id, $post_ancestors)) {
-			continue;
-		}
-
-		if (count($post_ancestors) != 1) {
 			continue;
 		}
 
